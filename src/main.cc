@@ -1,5 +1,7 @@
 
 
+#include "crow.h"
+
 
 #include <iostream>
 #include <algorithm>
@@ -64,7 +66,15 @@ int main(int argc, char **argv){
     // Puntero global al sistema singleton
     Sistema = &SLAM;
 
-    // Imagen de entrada
+        crow::SimpleApp app;
+
+        CROW_ROUTE(app, "/")([](){
+            return "Hello world";
+        });
+
+        app.port(9000).multithreaded().run();
+
+    /*// Imagen de entrada
     cv::Mat im;
 
     ORB_SLAM2::Viewer* visor = SLAM.mpViewer;
@@ -215,22 +225,22 @@ int main(int argc, char **argv){
     		Sistema->mpTracker->ChangeCalibration(rutaConfiguracion);//"webcan.yaml");
     	}
 
-    	/*
         // Stop cronómetro para medir duración del procesamiento
         double ttrack = std::chrono::duration_cast<std::chrono::duration<double> >(std::chrono::steady_clock::now() - t1).count();
 
         // Delay para 30 fps, período de 0.033 s
         if(ttrack < 0.033)
         	usleep((0.033-ttrack)*1e6);
-        */
 
-    }
-    cout << "Invocando shutdown..." << endl;
+
+
+    }*/
+/*    cout << "Invocando shutdown..." << endl;
 
     // Stop all threads
     SLAM.Shutdown();
 
-    cout << "Terminado." << endl;
+    cout << "Terminado." << endl;*/
 
     return 0;
 }
