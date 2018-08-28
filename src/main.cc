@@ -20,6 +20,8 @@
 #include <Serializer.h>
 #include <Video.h>
 
+#include <base64.h>
+
 #include <nlohmann/json.hpp>
 
 using nlohmann::json;
@@ -66,13 +68,24 @@ int main(int argc, char **argv){
     // Puntero global al sistema singleton
     Sistema = &SLAM;
 
-        crow::SimpleApp app;
+    crow::SimpleApp app;
 
-        CROW_ROUTE(app, "/")([](){
-            return "Hello world";
-        });
+    CROW_ROUTE(app, "/image")
+            .methods("POST"_method)
+                    ([](const crow::request &req) {
+                        auto x = crow::json::load(req.body);
+                        if (!x) {
+                            return crow::response(400);
+                        }
+                        const crow::json::detail::r_string &uri_string = x["uri"].s();
+                        std::vector<BYTE> decodedData = base64_decode(uri_string);
+                        cv::Mat img = cv::imdecode(decodedData, CV_LOAD_IMAGE_GRAYSCALE);
 
-        app.port(9000).multithreaded().run();
+                        return crow::response(200);
+                    });
+    app.port(9000).multithreaded().run();
+
+
 
     /*// Imagen de entrada
     cv::Mat im;

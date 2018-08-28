@@ -80,7 +80,7 @@ add_library(${PROJECT_NAME} SHARED
         src/Sim3Solver.cc
         src/Initializer.cc
         src/Video.cpp
-        src/Viewer.cc)
+        src/Viewer.cc src/base64.cc include/base64.h)
 
 get_cmake_property(_variableNames VARIABLES)
 list (SORT _variableNames)
@@ -103,5 +103,5 @@ file(COPY ${PROJECT_SOURCE_DIR}/app.settings.json DESTINATION ${CMAKE_BINARY_DIR
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-add_executable(reload src/main.cc)
+add_executable(reload src/main.cc src/base64.cc include/base64.h)
 target_link_libraries(reload ${PROJECT_NAME})
