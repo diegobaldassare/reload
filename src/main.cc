@@ -78,8 +78,14 @@ int main(int argc, char **argv){
                             return crow::response(400);
                         }
                         const crow::json::detail::r_string &uri_string = x["uri"].s();
+                        cout << uri_string.size() << endl;
                         std::vector<BYTE> decodedData = base64_decode(uri_string);
-                        cv::Mat img = cv::imdecode(decodedData, CV_LOAD_IMAGE_GRAYSCALE);
+                        cv::Mat img = cv::imdecode(decodedData, cv::IMREAD_UNCHANGED);
+
+                        namedWindow( "Display window", cv::WINDOW_NORMAL );   // Create a window for display.
+                        cv::imshow( "Display window", img );               // Show our image inside it.
+
+                        cv::waitKey(0);
 
                         return crow::response(200);
                     });
