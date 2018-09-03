@@ -8,7 +8,19 @@ export class ImageService {
 
   constructor(private http: HttpClient) { }
 
-  postImage(img) {
-    this.http.post(this.name + 'image', img).toPromise();
+  postImage(selectedFile) {
+  //   // this.http.post(this.name + 'image', img).toPromise();
+  //
+  //
+  //   const uploadData = new FormData();
+  //
+  //   uploadData.append('myFile', selectedFile, selectedFile.name);
+  //   this.http.post('http://localhost:9000/image', uploadData, {
+  //     reportProgress: true,
+  //     observe: 'events'
+  //   })
+  //     .subscribe(event => {
+  //       console.log(event); // handle event here
+  //     });
   }
 }
