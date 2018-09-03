@@ -1,0 +1,21 @@
+.background {
+  height: 100%;
+  width: 100%;
+  background-size: 100% 100%;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/9/9b/Reloj_con_Edificio_de_Grado_de_la_Universidad_Austral.jpg") top center no-repeat;
+}
+
+.add-button {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
